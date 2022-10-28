@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.activemenuselector.ActiveMenuSelector" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+<widget id="innoki.activemenuselector.ActiveMenuSelector" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
         supportedPlatform="Web"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Active Menu Selector</name>
-    <description>My widget description</description>
-    <icon/>
+    <description>Applies the "active" class to the current Menu item</description>
+    <icon>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</icon>
     <properties>
         <propertyGroup caption="General">
-            <property key="menuWidgetName" type="string" required="false">
+            <property key="menuWidgetName" type="string" required="true">
                 <caption>Menu widget name</caption>
                 <description>The name of your the menu widget. Will be something like "navigationTree3"</description>
             </property>
-            <property key="menuItemTitle" type="textTemplate" required="false">
+            <property key="menuItemTitle" type="textTemplate" required="true">
                 <caption>Target menu title</caption>
                 <description>The title of the menu item you wish to be made active.</description>
             </property>

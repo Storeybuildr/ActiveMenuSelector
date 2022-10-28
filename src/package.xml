@@ -5,7 +5,7 @@
             <widgetFile path="ActiveMenuSelector.xml"/>
         </widgetFiles>
         <files>
-            <file path="mendix/activemenuselector"/>
+            <file path="innoki/activemenuselector"/>
         </files>
     </clientModule>
 </package>

@@ -1,16 +1,16 @@
 {
   "name": "activemenuselector",
   "widgetName": "ActiveMenuSelector",
-  "version": "2.0.0",
-  "description": "My widget description",
-  "copyright": "2020 Mendix Technology BV",
-  "author": "Eric Tieniber",
+  "version": "3.0.0",
+  "description": "Active Menu Selector",
+  "copyright": "Storeybuildr Pty Ltd",
+  "author": "Storeybuildr Pty Ltd",
   "config": {
     "projectPath": "C:/DEV/Mendix/Innoki-main",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
-  "packagePath": "mendix",
+  "packagePath": "innoki",
   "scripts": {
     "start": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
