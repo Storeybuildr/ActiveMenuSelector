@@ -6,7 +6,7 @@
   "copyright": "2020 Mendix Technology BV",
   "author": "Eric Tieniber",
   "config": {
-    "projectPath": "/Volumes/[C] Windows 10/Mendix/Internal/MenuSelector-main",
+    "projectPath": "C:/DEV/Mendix/Innoki-main",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"
   },
@@ -24,6 +24,6 @@
     "@mendix/pluggable-widgets-tools": "^9.0.0"
   },
   "dependencies": {
-    "classnames": "^2.2.6"
+    "react": "^18.2.0"
   }
 }

@@ -1,62 +1,78 @@
-import { Component, createElement } from "react";
+// eslint-disable-next-line no-unused-vars
+import React, { createElement, useCallback, useEffect, useRef, useState } from "react";
 
-export default class ActiveMenuSelector extends Component {
+function componentShouldUpdate(current, next) {}
 
-    componentDidMount() {
-        this.activateMenu();
-    }
+React.memo(MenuSelector, componentShouldUpdate);
 
-    render() {
-        return null;
-    }
+const ActiveMenuSelector = props => <MenuSelector props={props} />;
+export default ActiveMenuSelector;
 
-    async activateMenu() {
-        const { menuWidgetName, menuItemTitle } = this.props;
-        //find the menu
-        var menu = document.querySelector(".mx-name-" + menuWidgetName);
-        
-        // Sometimes the menu hasn't loaded yet. Try 3 times to get it and then give up.
-        // Very rarely does it go beyond the first retry.
-        if (menu === null) {
-            await this.timeout(100);
-            menu = document.querySelector(".mx-name-" + menuWidgetName);
-            if (menu === null) {
-                await this.timeout(200);
-                menu = document.querySelector(".mx-name-" + menuWidgetName);
-                if (menu === null) {
-                    await this.timeout(400);
-                    menu = document.querySelector(".mx-name-" + menuWidgetName);
+function MenuSelector({ props }) {
+    const [menu, setMenu] = useState();
+
+    // Menu properties
+    const menuWidgetName = props.menuWidgetName;
+    const menuItemTitle = props.menuItemTitle.value;
+
+    const napTime = ms => new Promise(res => setTimeout(res, ms));
+
+    // componentDidMount() {
+    useEffect(() => {
+        async function setActiveMenu() {
+            let delay = 50;
+            const delayIncrement = 50;
+
+            let retryCount = 0;
+            const maxRetries = 6;
+
+            await napTime(500);
+
+            // Sometimes the menu hasn't loaded yet. Try ${maxRetries} times to get it and then give up.
+            // Very rarely does it go beyond the first retry.
+            let _menu;
+            while (retryCount < maxRetries) {
+                _menu = document.querySelector(`.mx-name-${menuWidgetName}`);
+
+                if (_menu) {
+                    break;
                 }
+                retryCount++;
+                delay += delayIncrement;
+                await napTime(delay);
             }
-        }
-        if (menu === null) {
-            console.error("ActiveMenuSelector widget could not find menu: " + menuWidgetName);
-            return;
-        }
-        //remove the active state from any/all of the menu items
-        if (menu.querySelector(".active") !== null) {
-            const activeItems = menu.querySelectorAll(".active");
-            activeItems.forEach(menuItem => menuItem.classList.remove("active"));
-        }
-        //add the active state back to the one that matches your target title
-        const targetItem = menu.querySelector("a[title='" + menuItemTitle.value + "']");
-        if (targetItem) {
-            //top nav menu requires the parent (li) to have the active class
-            targetItem.classList.add("active");
-            //left nav tree requires the (a) element to have the active class
-            targetItem.parentNode.classList.add("active");
-        } else {
-            console.error(
-                "ActiveMenuSelector widget could not find target: " +
-                menuItemTitle.value +
-                " in menu: " +
-                menuWidgetName
-            );
-        }
-    }
 
-    timeout(delay) {
-        return new Promise(res => setTimeout(res, delay));
-    }
+            // Fail if no menu found within retry limit
+            if (!_menu) {
+                console.error(`ActiveMenuSelector widget could not find menu: ${menuWidgetName}`);
+                return;
+            }
+
+            // Remove the active state from any/all of the menu items
+            if (_menu.querySelector(".active") !== null) {
+                const activeItems = _menu.querySelectorAll(".active");
+                activeItems.forEach(menuItem => menuItem.classList.remove("active"));
+            }
+
+            // Add the active state back to the one that matches your target title
+            const targetItem = _menu.querySelector(`a[title='${menuItemTitle}']`);
+            if (targetItem) {
+                // Top nav menu requires the parent (li) to have the active class
+                targetItem.classList.add("active");
+                targetItem.setAttribute("id", "left-nav-active-item");
+                // Left nav tree requires the (a) element to have the active class
+                targetItem.parentNode.classList.add("active");
+                targetItem.parentNode.setAttribute("id", "left-nav-active-item");
+            } else {
+                console.error(
+                    `ActiveMenuSelector widget could not find target: ${menuItemTitle} in menu: ${menuWidgetName}`
+                );
+            }
+
+            setMenu(_menu);
+        }
+        setActiveMenu();
+    }, [menu, menuItemTitle, menuWidgetName]);
+
+    return <></>;
 }
-
