@@ -1,10 +1,14 @@
 {
   "name": "activemenuselector",
   "widgetName": "ActiveMenuSelector",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "description": "Active Menu Selector",
-  "copyright": "Storeybuildr Pty Ltd",
-  "author": "Storeybuildr Pty Ltd",
+  "copyright": "© Innoki IP Pty Ltd 2022. All rights reserved.",
+  "author": "David Tout",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
   "config": {
     "projectPath": "C:/DEV/Mendix/Innoki-main",
     "mendixHost": "http://localhost:8080",
@@ -19,7 +23,6 @@
     "prerelease": "npm run lint",
     "release": "pluggable-widgets-tools release:web"
   },
-  "license": "Apache-2.0",
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "^9.0.0"
   },
